@@ -1,0 +1,1 @@
+tsc "Scripts/update.ts" --target "ES2016"
