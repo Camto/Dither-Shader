@@ -12,7 +12,7 @@ window.onload = () => {
 	pencil.imageSmoothingEnabled = false;
 	
 	leaf = new Image();
-	leaf.src = "PICS/leaf.png";
+	leaf.src = "PICS/Leaf.png";
 	
 	setInterval(update, 1000/30);
 	
