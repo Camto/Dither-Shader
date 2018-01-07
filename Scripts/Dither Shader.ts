@@ -1,5 +1,3 @@
-// var approx_shade = (n:number):number => Math.round(n/64); // Round to the nearest 64th.
-
 function fill_selection(pixels:ImageData, data_width:number, x:number, y:number, pixel_size:number, alpha:number) {
 	for(let span_y = 0; span_y < pixel_size; span_y++) {
 		for(let span_x = 0; span_x < pixel_size; span_x++) {
@@ -17,10 +15,13 @@ function dither_shader(pencil:CanvasRenderingContext2D, selection:number[], pixe
 			switch(pixels.data[(x + y * pixels.width) * 4 + 3]) {
 				
 				case 0:
+				case 1:
 					fill_selection(pixels, pixels.width, x, y, pixel_size, 0);
 					break;
 				
+				case 63:
 				case 64:
+				case 65:
 					if(!((x / pixel_size) % 2) && !((y / pixel_size) % 2)) {
 						fill_selection(pixels, pixels.width, x, y, pixel_size, 255);
 					} else {
@@ -28,7 +29,9 @@ function dither_shader(pencil:CanvasRenderingContext2D, selection:number[], pixe
 					}
 					break;
 				
+				case 111:
 				case 112:
+				case 113:
 					if(!((x + y) / pixel_size % 2)) {
 						fill_selection(pixels, pixels.width, x, y, pixel_size, 255);
 					} else {
@@ -36,7 +39,9 @@ function dither_shader(pencil:CanvasRenderingContext2D, selection:number[], pixe
 					}
 					break;
 				
+				case 147:
 				case 148:
+				case 149:
 					if(!(!((x / pixel_size) % 2) && ((y / pixel_size) % 2))) {
 						fill_selection(pixels, pixels.width, x, y, pixel_size, 255);
 					} else {
