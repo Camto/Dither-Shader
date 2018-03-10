@@ -1,0 +1,43 @@
+number round(number num) {
+	return floor(num + 0.5);
+}
+
+vec2 round(vec2 num) {
+	return floor(num + 0.5);
+}
+
+vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
+	
+	vec2 screen = round(screen_coords / 2.0);
+	vec4 current_colour_vec = Texel(texture, round(texture_coords * 200) / 200);
+	number current_colour = round(current_colour_vec.r * 5.33333);
+	number colour = 1.0;
+	
+	if(current_colour == 0.0 || current_colour == 1.0) {
+		colour = 0.0;
+	}
+	if(current_colour == 2.0) {
+		if((mod(screen.x, 2) == 0.0) && (mod(screen.y, 2) == 0.0)) {
+			colour = 1.0;
+		} else {
+			colour = 0.0;
+		}
+	}
+	if(current_colour == 3.0) {
+		if(mod(screen.x + screen.y, 2) == 0.0) {
+			colour = 1.0;
+		} else {
+			colour = 0.0;
+		}
+	}
+	if(current_colour == 4.0) {
+		if(!((mod(screen.x, 2) == 0.0) && (mod(screen.y, 2) == 0.0))) {
+			colour = 1.0;
+		} else {
+			colour = 0.0;
+		}
+	}
+	
+	return vec4(colour, colour, colour, 1.0);
+	
+}
